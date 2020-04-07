@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UserDao" >
+    <insert id="insert">
+        insert into tb_user (user_id, dept_id, user_account,
+      user_password, user_name, img,
+      user_age, user_sex, user_address,
+      user_birth, user_phone,email,reg_time) values (#{userId},#{deptId},
+      #{userAccount},#{userPassword},#{userName},#{img},#{userAge},
+      #{sex},#{userAddress},#{userBirth},#{userPhone},#{email},#{regTime})
+    </insert>
+    <update id="updateByIdBySelective">
+        update tb_user
+        <set>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="userAccount != null">
+                user_account = #{userAccount},
+            </if>
+            <if test="userPassword != null">
+                user_password = #{userPassword},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="img != null">
+                img = #{img},
+            </if>
+            <if test="userAge != null">
+                user_age = #{userAge},
+            </if>
+            <if test="sex != null">
+                user_sex = #{sex},
+            </if>
+            <if test="userAddress != null">
+                user_address = #{userAddress},
+            </if>
+            <if test="userBirth != null">
+                user_birth = #{userBirth},
+            </if>
+            <if test="userPhone != null">
+                user_phone = #{userPhone},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="regTime != null">
+                reg_time = #{regTime},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+    <delete id="deleteById">
+        delete from tb_user where user_id = #{id}
+    </delete>
+
+    <select id="getList" resultType="com.example.demo.domain.User">
+        select * from tb_user;
+    </select>
+    <select id="getById" resultType="com.example.demo.domain.User">
+        select * from tb_user where user_id = #{id}
+    </select>
+</mapper>
